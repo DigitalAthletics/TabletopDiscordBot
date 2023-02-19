@@ -124,4 +124,4 @@ async def on_message(message):
                 await message.channel.send(await main.Find_Val(d[Val], Data[1], game_mode, "skill"))
 
 # print(os.getenv('TOKEN'))
-client.run("OTY3NjgxMzY3MjU1MTU4ODI0.YmT1gA._McRWEjATj-uGRmK7_Jh-wY_9as")
+client.run(" ")
