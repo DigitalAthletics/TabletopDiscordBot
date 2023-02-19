@@ -22,3 +22,6 @@ and
 $weapondmg x,y - to do a damage roll  
 
 It also makes playing from phone much more comfortable, allowing you to stay in Discord and not switching apps every time to check data in table.
+
+## How to use  
+You need to add bot token at the end of bot.py file and add bot to the server.
