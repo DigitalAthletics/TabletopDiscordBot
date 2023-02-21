@@ -1,7 +1,7 @@
 ## About
-This project was started at 2020, after the group i used to play board games with was locked at homes due to epidemic.  
+This project was started at 2020, after the group i used to play board games (mainly Pathfinder, tabletop game where you use dices to understand the succesability of character actions) with was locked at homes due to epidemic.  
 We megrated from offline meetings to Discord and our character sheets move from paper to Google Sheets.  
-Pretty fast i come to idea of simpification of the "i go to google sheet page, check my roll value, throw the dice and type result to chat" process.  
+Pretty fast i come to idea of simpification of the "i go to google sheet page, check my dice roll value, throw the dice and type result to chat" process.  
 ## How this works
 This bot allows you to link your character table (Generic table looks like [this](https://docs.google.com/spreadsheets/d/1EhXmtRZq-UEH1mSGP565p-rWuwEbVLTCr5rrDDu9LsY/edit#gid=0)) to a character using "Add new player command [ *character name*, *link to table*]"
 
