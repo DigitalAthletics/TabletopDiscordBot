@@ -34,7 +34,7 @@ async def on_message(message):
         Data[1] = Data[1].replace(' ', '')
         d = json.load(open("Players.json"))
         if Data[0] in d.keys():
-            await message.channel.send('Name taken')
+            message.channel.send('Name taken')
         else:
             d[Data[0]] = Data[1]
             with open('Players.json', 'w') as f:
@@ -66,7 +66,7 @@ async def on_message(message):
         i = 0
         while i < 10:
             await message.channel.send("iteration" + " " + str(i) + " " + ":")
-            await message.channel.send(main.CubeSim("1", "20", "0", "-"))
+            await message.channel.send(main.CubeSim(1, 20, 0, "-"))
             i = i + 1
     # --------------------------------------
     if message.content.startswith('$do'):
@@ -79,7 +79,7 @@ async def on_message(message):
         Val = Data[0].replace(' ', '')
         # print(Val)
         if Val in d:
-            await message.channel.send(await main.What_Do(d[Val], Data[1], game_mode))
+            await message.channel.send(main.What_Do(d[Val], Data[1], game_mode))
     # --------------------------------------
     if message.content.startswith('$weaponacc'):
         message.content.replace('$weaponacc', '')
@@ -91,7 +91,7 @@ async def on_message(message):
         Val = Data[0].replace(' ', '')
         # print(Val)
         if Val in d:
-            await message.channel.send(await main.Find_Val(d[Val], Data[1], game_mode, "acc"))
+            await message.channel.send(main.Find_Val(d[Val], Data[1], game_mode, "acc"))
     # --------------------------------------
     if message.content.startswith('$weapondmg'):
         message.content.replace('$weapondmg', '')
@@ -103,7 +103,7 @@ async def on_message(message):
         Val = Data[0].replace(' ', '')
         # print(Val)
         if Val in d:
-            await message.channel.send(await main.Find_Val(d[Val], Data[1], game_mode, "dmg"))
+            await message.channel.send(main.Find_Val(d[Val], Data[1], game_mode, "dmg"))
     # --------------------------------------
     if message.content.startswith('$skill'):
         message.content.replace('$skill', '')
@@ -118,10 +118,10 @@ async def on_message(message):
         if Val in d:
             Data[1] = Data[1].lower()
             if Data[1] == "инициатива" or Data[1] == "стойкость" or Data[1] == "реакция" or Data[1] == "воля":
-                await message.channel.send(await main.What_Do(d[Val], Data[1], game_mode))
+                await message.channel.send(main.What_Do(d[Val], Data[1], game_mode))
             else:
                 # print(Data[1])
-                await message.channel.send(await main.Find_Val(d[Val], Data[1], game_mode, "skill"))
+                await message.channel.send(main.Find_Val(d[Val], Data[1], game_mode, "skill"))
 
 # print(os.getenv('TOKEN'))
 client.run(" ")
