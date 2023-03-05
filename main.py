@@ -106,7 +106,7 @@ def CubeSim_wrap(string):
         return CubeSim(int(numbers[0]), int(numbers[1]), 0, sign)
 
 
-async def Find_Val(player_name, weapon, game_mode, code):
+def Find_Val(player_name, weapon, game_mode, code):
     if player_name is not None:
         if game_mode is not None:
             creds = None
@@ -139,9 +139,9 @@ async def Find_Val(player_name, weapon, game_mode, code):
                 service = discovery.build('sheets', 'v4', credentials=creds)
                 # print(weapon)
                 if (code == "skill"):
-                    request = service.spreadsheets().values().get(spreadsheetId=player_name, range="Навыки!A3:A37")
+                    request = service.spreadsheets().values().get(spreadsheetId=player_name, range="Навыки!A3:A99")
                 else:
-                    request = service.spreadsheets().values().get(spreadsheetId=player_name, range="Главная!B1:B30")
+                    request = service.spreadsheets().values().get(spreadsheetId=player_name, range="Главная!B1:B99")
                 response = request.execute()
                 # print(response)
                 rows = response.get('values', [])
@@ -153,9 +153,9 @@ async def Find_Val(player_name, weapon, game_mode, code):
                     i = i + 1
                     for y in x:
                         y = y.lower()
-                        # print(code)
-                        # print(weapon)
-                        # print(y)
+                        #print(code)
+                        #print(weapon)
+                        #print(y)
                         if y == weapon and code != "skill":
                             if code == "acc":
                                 if game_mode == "Pathfinder_old":
@@ -188,7 +188,7 @@ async def Find_Val(player_name, weapon, game_mode, code):
                 print(err)
 
 
-async def What_Do(player_name, command, game_mode):
+def What_Do(player_name, command, game_mode):
     # print(player_name)
     # print(command)
     # print(game_mode)
