@@ -10,6 +10,8 @@ import Logger_custom
 client = discord.Client()
 # default value
 game_mode = 'Pathfinder_simplified'
+# init flag
+ready = 0
 
 
 @client.event
@@ -124,4 +126,7 @@ async def on_message(message):
                 await message.channel.send(main.Find_Val(d[Val], Data[1], game_mode, "skill"))
 
 # print(os.getenv('TOKEN'))
-client.run(" ")
+if ready==0:
+    client.run("TOKEN")
+    ready = 1
+
