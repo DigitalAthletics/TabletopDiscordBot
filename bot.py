@@ -1,9 +1,6 @@
 import discord
-# import os
 import sys
-# import requests
 import json
-# from discord.ext import commands
 import main
 import Logger_custom
 
@@ -25,9 +22,11 @@ async def on_message(message):
     if message.author == client.user:
         return
     # --------------------------------------
+    # test command
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
     # --------------------------------------
+    # command to add player to list of players
     if message.content.startswith('$Add new player:'):
         Str = message.content.replace('$Add new player:', '')
         Str = Str.replace('$Add new player:', '')
@@ -45,39 +44,38 @@ async def on_message(message):
                 Logger_custom.AppendLog("Player added " + Data[0])
             await message.channel.send('Player added,' + ' player name:' + Data[0])
     # --------------------------------------
-    # if message.content.startswith('$REBOOT'):
-        # await message.channel.send('Reboot done')
-        # Logger_custom.AppendLog("Reboot call")
-        # os.system('python bot.py')
-        # sys.exit()
-    # --------------------------------------
+    # command to stop bot
     if message.content.startswith('$EXIT123a098'):
         await message.channel.send('Exit done')
         Logger_custom.AppendLog("Exit call")
         sys.exit()
     # --------------------------------------
+    # different version of table.
     if message.content.startswith('$Pathfinder_old'):
         game_mode = 'Pathfinder_old'
         await message.channel.send('game mode set to "Pathfinder_old"')
     # --------------------------------------
+    # different version of table. Only simplified is in use now    
     if message.content.startswith('$Pathfinder_simplified'):
         game_mode = '$Pathfinder_simplified'
         await message.channel.send('game mode set to "$Pathfinder_simplified"')
     # --------------------------------------
+    # roll dice 10 times 
     if message.content.startswith('$CUBE_TEST'):
         i = 0
         while i < 10:
             await message.channel.send("iteration" + " " + str(i) + " " + ":")
             await message.channel.send(main.CubeSim(1, 20, 0, "-"))
             i = i + 1
-    # --------------------------------------
+    # ---------------------------------------------
+    # different types of character-related commands
+    # ---------------------------------------------    
     if message.content.startswith('$do'):
         message.content.replace('$do', '')
         Str = message.content
         Str = Str.replace('$do', '')
         Data = Str.split(",")
         d = json.load(open("Players.json"))
-        # print(Data[0])
         Val = Data[0].replace(' ', '')
         # print(Val)
         if Val in d:
@@ -89,7 +87,6 @@ async def on_message(message):
         Str = Str.replace('$weaponacc', '')
         Data = Str.split(",")
         d = json.load(open("Players.json"))
-        # print(Data[0])
         Val = Data[0].replace(' ', '')
         # print(Val)
         if Val in d:
@@ -101,7 +98,6 @@ async def on_message(message):
         Str = Str.replace('$weapondmg', '')
         Data = Str.split(",")
         d = json.load(open("Players.json"))
-        # print(Data[0])
         Val = Data[0].replace(' ', '')
         # print(Val)
         if Val in d:
@@ -113,19 +109,15 @@ async def on_message(message):
         Str = Str.replace('$skill', '')
         Data = Str.split(",")
         d = json.load(open("Players.json"))
-        # print(Data[0])
         Val = Data[0].replace(' ', '')
         # print(Val)
-        # print(Data[1])
         if Val in d:
             Data[1] = Data[1].lower()
             if Data[1] == "инициатива" or Data[1] == "стойкость" or Data[1] == "реакция" or Data[1] == "воля":
                 await message.channel.send(main.What_Do(d[Val], Data[1], game_mode))
             else:
-                # print(Data[1])
                 await message.channel.send(main.Find_Val(d[Val], Data[1], game_mode, "skill"))
 
-# print(os.getenv('TOKEN'))
 if ready==0:
     client.run("TOKEN")
     ready = 1
