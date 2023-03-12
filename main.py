@@ -1,13 +1,9 @@
 from __future__ import print_function
 
-# import json
 import os.path
-# import asyncio
 import random
 import re
-# import requests
 import Logger_custom
-# import numpy as np
 
 import google_auth_oauthlib
 from google.auth.transport.requests import Request
@@ -21,7 +17,6 @@ from googleapiclient.errors import HttpError
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 
-# TODO: async
 def Read_Cell(spreadsheet_id, range_name):
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
