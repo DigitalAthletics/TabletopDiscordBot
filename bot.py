@@ -149,6 +149,6 @@ async def on_message(message):
 
 # print(os.getenv('TOKEN'))
 if ready==0:
-    client.run("OTY3NjgxMzY3MjU1MTU4ODI0.Go6o9b.J5Agd0zF_YXXJztewAFbwDZhtWaeGLXw-W02Bw")
+    client.run(" ")
     on_ready()
     ready = 1
