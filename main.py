@@ -5,7 +5,6 @@ import random
 import re
 import Logger_custom
 
-import google_auth_oauthlib
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -16,6 +15,10 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
+res = 0
+
+def Result():
+    return res
 
 def Read_Cell(spreadsheet_id, range_name):
     creds = None
@@ -52,10 +55,7 @@ def Read_Cell(spreadsheet_id, range_name):
     try:
         service = discovery.build('sheets', 'v4', credentials=creds)
         value = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
-        # print(value)
         Cell_val = str(value.get('values'))
-        # print(Cell_val)
-        # print(Cell_val[3:(len(Cell_val)-3)])
         return Cell_val[3:(len(Cell_val) - 3)]
     except HttpError as err:
         print(err)
@@ -63,6 +63,7 @@ def Read_Cell(spreadsheet_id, range_name):
 
 # number of dices - dice size - bonus to roll - bonus sign
 def CubeSim(num, val, bonus, sign):
+    global res
     i = 1
     result = 0
 
@@ -77,8 +78,10 @@ def CubeSim(num, val, bonus, sign):
         result += random.randint(i, val)
         i += 1
 
-    msg = "Roll:" + str(result) + ", [mod:"+ sign + str(bonus) + "]" #", [mod:" + sign + str(bonus) + " ," + "dices:" + str(num) + " ," + "dice size:" + str(val) + "]"
-    # print(msg)
+    msg = "Roll:" + str(result) + ", [mod:" + sign + str(bonus) + "]" #", [mod:" + sign + str(bonus) + " ," + "dices:" + str(num) + " ," + "dice size:" + str(val) + "]"
+    
+    res = 1
+
     return msg
 
 
@@ -90,11 +93,6 @@ def CubeSim_wrap(string):
         sign = "+"
     rx = re.compile(r'-?\d+(?:\.\d+)?')
     numbers = rx.findall(string)
-    # print(numbers)
-    # print(len(numbers))
-    # print(int(numbers[0]))
-    # print(int(numbers[1]))
-    # print(int(numbers[2]))
     if len(numbers) == 3:
         return CubeSim(int(numbers[0]), int(numbers[1]), int(numbers[2]), sign)
     elif len(numbers) == 2:
@@ -102,6 +100,8 @@ def CubeSim_wrap(string):
 
 
 def Find_Val(player_name, weapon, game_mode, code):
+    global res
+    res = 0
     if player_name is not None:
         if game_mode is not None:
             creds = None
@@ -132,15 +132,12 @@ def Find_Val(player_name, weapon, game_mode, code):
                     token.write(creds.to_json())
             try:
                 service = discovery.build('sheets', 'v4', credentials=creds)
-                # print(weapon)
                 if (code == "skill"):
-                    request = service.spreadsheets().values().get(spreadsheetId=player_name, range="Навыки!A3:A99")
+                    request = service.spreadsheets().values().get(spreadsheetId=player_name, range="Навыки!A3:A40")
                 else:
-                    request = service.spreadsheets().values().get(spreadsheetId=player_name, range="Главная!B1:B99")
+                    request = service.spreadsheets().values().get(spreadsheetId=player_name, range="Главная!B1:B40")
                 response = request.execute()
-                # print(response)
                 rows = response.get('values', [])
-                # print(rows)
                 i = 0
                 code = code.lower()
                 weapon = weapon.lower()
@@ -148,35 +145,24 @@ def Find_Val(player_name, weapon, game_mode, code):
                     i = i + 1
                     for y in x:
                         y = y.lower()
-                        #print(code)
-                        #print(weapon)
-                        #print(y)
                         if y == weapon and code != "skill":
                             if code == "acc":
                                 if game_mode == "Pathfinder_old":
                                     strVal = "Главная!D" + str(i)
-                                    # print(strVal)
                                     return CubeSim_wrap(Read_Cell(player_name, strVal))
                                 elif game_mode == "Pathfinder_simplified":
                                     strVal = "Главная!E" + str(i)
-                                    # print(strVal)
                                     return CubeSim_wrap(Read_Cell(player_name, strVal))
                             elif code == "dmg":
                                 if game_mode == "Pathfinder_old":
                                     strVal = "Главная!I" + str(i)
-                                    # print(strVal)
                                     return CubeSim_wrap(Read_Cell(player_name, strVal))
                                 elif game_mode == "Pathfinder_simplified":
                                     strVal = "Главная!K" + str(i)
-                                    # print(strVal)
                                     return CubeSim_wrap(Read_Cell(player_name, strVal))
                         elif code == "skill":
                             if y == weapon:
-                                # print(i)
-                                # print("2")
                                 strVal = "Навыки!I" + str(i+2)
-                                # print("3")
-                                # print(strVal)
                                 return CubeSim_wrap(Read_Cell(player_name, strVal))
 
             except HttpError as err:
@@ -184,9 +170,8 @@ def Find_Val(player_name, weapon, game_mode, code):
 
 
 def What_Do(player_name, command, game_mode):
-    # print(player_name)
-    # print(command)
-    # print(game_mode)
+    global res
+    res = 0
     if player_name is not None:
         if game_mode is not None:
             if game_mode == "Pathfinder_old":
