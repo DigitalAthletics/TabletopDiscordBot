@@ -131,4 +131,4 @@ async def on_message(message):
     # Logger_custom.AppendLog("Thread count: "+ str(threading.active_count()))
     # Logger_custom.AppendLog("Cancel status: " + str(was_cancelled))
 
-client.run("OTY3NjgxMzY3MjU1MTU4ODI0.GiUaX7.ZJjvadARA026wuDDnzUo9IKb1EsIfTUUoC7S9w")
+client.run("")
