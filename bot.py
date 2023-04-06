@@ -1,6 +1,7 @@
 import discord
 import sys
 import json
+# from discord.ext import commands
 import main
 import Logger_custom
 import threading
@@ -13,12 +14,6 @@ client = discord.Client(intents=intents)
 game_mode = 'Pathfinder_simplified'
 ready = 0
 
-tasks = []
-threads = []
-threads_new = []
-counter = 0
-task_for_deletion = 0
-
 
 @client.event
 async def on_ready():
@@ -28,10 +23,6 @@ async def on_ready():
 @client.event
 async def on_message(message):
     global game_mode
-    global counter
-    global tasks
-    global threads
-    global task_for_deletion
 
     if message.author == client.user:
         return
@@ -120,15 +111,18 @@ async def on_message(message):
         if Val in d:
             Data[1] = Data[1].lower()
             if Data[1] == "инициатива" or Data[1] == "стойкость" or Data[1] == "реакция" or Data[1] == "воля":
-                was_cancelled = 0
                 await message.channel.send(main.What_Do(d[Val], Data[1], game_mode))
             else:
                 await message.channel.send(main.Find_Val(d[Val], Data[1], game_mode, "skill"))
-
+    # --------------------------------------
+    elif message.content.startswith('$commands'):
+        await message.channel.send('Commands List:'
+                                   '\n$Add new player:**in-game character name**,**google table link**,'
+                                   '\n$skill,**skill name**,'
+                                   '\n$weaponacc,**weapon name**,'
+                                   '\n$weapondmg,**weapon name**.')
     # --------------------------------------
     print("Thread count: " + str(threading.active_count()))
-
-    # Logger_custom.AppendLog("Thread count: "+ str(threading.active_count()))
-    # Logger_custom.AppendLog("Cancel status: " + str(was_cancelled))
+    Logger_custom.AppendLog("Thread count: " + str(threading.active_count()))
 
 client.run("")
