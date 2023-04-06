@@ -17,8 +17,10 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 res = 0
 
+
 def Result():
     return res
+
 
 def Read_Cell(spreadsheet_id, range_name):
     creds = None
@@ -78,7 +80,7 @@ def CubeSim(num, val, bonus, sign):
         result += random.randint(i, val)
         i += 1
 
-    msg = "Roll:" + str(result) + ", [mod:" + sign + str(bonus) + "]" #", [mod:" + sign + str(bonus) + " ," + "dices:" + str(num) + " ," + "dice size:" + str(val) + "]"
+    msg = "Roll:" + str(result) + ", [mod:" + sign + str(bonus) + "]"  # ", [mod:" + sign + str(bonus) + " ," + "dices:" + str(num) + " ," + "dice size:" + str(val) + "]"
     
     res = 1
 
@@ -132,7 +134,7 @@ def Find_Val(player_name, weapon, game_mode, code):
                     token.write(creds.to_json())
             try:
                 service = discovery.build('sheets', 'v4', credentials=creds)
-                if (code == "skill"):
+                if code == "skill":
                     request = service.spreadsheets().values().get(spreadsheetId=player_name, range="Навыки!A3:A40")
                 else:
                     request = service.spreadsheets().values().get(spreadsheetId=player_name, range="Главная!B1:B40")
