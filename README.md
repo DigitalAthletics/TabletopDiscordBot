@@ -3,11 +3,11 @@ This project was started at 2020, after the group i used to play board games (ma
 We megrated from offline meetings to Discord and our character sheets move from paper to Google Sheets.  
 Pretty fast i come to idea of simpification of the "i go to google sheet page, check my dice roll value, throw the dice and type result to chat" process.  
 ## How this works
-This bot allows you to link your character table (Generic table looks like [this](https://docs.google.com/spreadsheets/d/1EhXmtRZq-UEH1mSGP565p-rWuwEbVLTCr5rrDDu9LsY/edit#gid=0)) to a character using "Add new player command [ *character name*, *link to table*]"
+This bot allows you to link your in-game character table (Generic table looks like [this](https://docs.google.com/spreadsheets/d/1EhXmtRZq-UEH1mSGP565p-rWuwEbVLTCr5rrDDu9LsY/edit#gid=0)) to bot using "Add new player command [ *character name*, *link to table*]"
 
 ![This is an image](Adding_player.JPG)
 
-Character name (should be unique, bot will say, if it is not) and
+In-game character name (should be unique, bot will say, if it is not) and
 "link to the table" is unique part of Google Sheet link, looks like this
 
 ![This is an image](link.JPG)
@@ -16,10 +16,7 @@ After that you can use various commands to get easy access to data stored in a t
 
 ![This is an image](DiceRoll.JPG)
 
-There is also few other commands like  
-$weaponacc x,y - to do a hit roll  
-and  
-$weapondmg x,y - to do a damage roll  
+There is also few other commands. You can see full list by typing $commands.
 
 It also makes playing from phone much more comfortable, allowing you to stay in Discord and not switching apps every time to check data in table.
 
