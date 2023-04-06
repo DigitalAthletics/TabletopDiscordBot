@@ -15,12 +15,6 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
-res = 0
-
-
-def Result():
-    return res
-
 
 def Read_Cell(spreadsheet_id, range_name):
     creds = None
@@ -65,7 +59,6 @@ def Read_Cell(spreadsheet_id, range_name):
 
 # number of dices - dice size - bonus to roll - bonus sign
 def CubeSim(num, val, bonus, sign):
-    global res
     i = 1
     result = 0
 
@@ -81,9 +74,6 @@ def CubeSim(num, val, bonus, sign):
         i += 1
 
     msg = "Roll:" + str(result) + ", [mod:" + sign + str(bonus) + "]"  # ", [mod:" + sign + str(bonus) + " ," + "dices:" + str(num) + " ," + "dice size:" + str(val) + "]"
-    
-    res = 1
-
     return msg
 
 
@@ -102,8 +92,6 @@ def CubeSim_wrap(string):
 
 
 def Find_Val(player_name, weapon, game_mode, code):
-    global res
-    res = 0
     if player_name is not None:
         if game_mode is not None:
             creds = None
@@ -172,8 +160,6 @@ def Find_Val(player_name, weapon, game_mode, code):
 
 
 def What_Do(player_name, command, game_mode):
-    global res
-    res = 0
     if player_name is not None:
         if game_mode is not None:
             if game_mode == "Pathfinder_old":
