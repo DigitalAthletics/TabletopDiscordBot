@@ -16,7 +16,7 @@ After that you can use various commands to get easy access to data stored in a t
 
 ![This is an image](DiceRoll.JPG)
 
-There is also few other commands. You can see full list by typing $commands.
+There is also few other commands. You can see full list by typing **$commands**.
 
 It also makes playing from phone much more comfortable, allowing you to stay in Discord and not switching apps every time to check data in table.
 
