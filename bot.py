@@ -117,10 +117,10 @@ async def on_message(message):
     # --------------------------------------
     elif message.content.startswith('$commands'):
         await message.channel.send('Commands List:'
-                                   '\n$Add new player:**in-game character name**,**google table link**,'
-                                   '\n$skill,**skill name**,'
-                                   '\n$weaponacc,**weapon name**,'
-                                   '\n$weapondmg,**weapon name**.')
+                                   '\n$Add new player: **in-game character name**,**google table link**,'
+                                   '\n$skill **in-game character name**,**skill name**,'
+                                   '\n$weaponacc **in-game character name**,**weapon name**,'
+                                   '\n$weapondmg **in-game character name**,**weapon name**.')
     # --------------------------------------
     print("Thread count: " + str(threading.active_count()))
     Logger_custom.AppendLog("Thread count: " + str(threading.active_count()))
