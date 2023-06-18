@@ -61,19 +61,27 @@ def Read_Cell(spreadsheet_id, range_name):
 def CubeSim(num, val, bonus, sign):
     i = 1
     result = 0
+    mod = 0
+
+    bonus = abs(bonus)
+    num = abs(num)
+    val = abs(val)
 
     # result = int(bonus)
     if "-" in sign:
         # print("-")
-        result -= bonus * num
+        mod = -1 * bonus * num
     elif "+" in sign:
         # print("+")
-        result += bonus * num
-    while i <= num:
-        result += random.randint(i, val)
-        i += 1
+        mod = bonus * num
 
-    msg = "Roll:" + str(result) + ", [mod:" + sign + str(bonus) + "]"  # ", [mod:" + sign + str(bonus) + " ," + "dices:" + str(num) + " ," + "dice size:" + str(val) + "]"
+    while i <= num:
+        result += random.randint(1, val)
+        i = i + 1
+
+    end_val = result + mod
+
+    msg = "Roll:" + str(end_val) + ", [" + str(result) + sign + str(bonus) + "]"  # ", [mod:" + sign + str(bonus) + " ," + "dices:" + str(num) + " ," + "dice size:" + str(val) + "]"
     return msg
 
 
